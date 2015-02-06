@@ -1,6 +1,7 @@
 <?php 
 	require_once('connect.php');
-	$sql = "select * from article order by dateline desc";
+	$key = $_GET['key'];
+	$sql = "select * from article where title like '$key%' order by dateline desc";
 	$query = mysql_query($sql);
 	if ($query&&mysql_num_rows($query)) {
 		while ($row = mysql_fetch_assoc($query)) {
@@ -11,12 +12,6 @@
 	}
  ?>
 
-<form action="article.search.php" method="get">
-	<fieldset>
-		<input type="text" id="s" name="key" value=""/>
-		<input type="submit" id="x" value="Search"/>
-	</fieldset>
-</form>
  <div id="content">
  	<?php 
  		if (empty($data)) {
